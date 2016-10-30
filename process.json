@@ -1,0 +1,17 @@
+{
+  "apps": [{
+		"name": "nodejs-todo",
+		"script": "server.js",
+		"instances": 2,
+		"exec_mode": "cluster",
+		"error_file": "/var/log/nodejs-todo.error.log",
+		"out_file": "/var/log/nodejs-todo.out.log",
+		"merge_logs": true,
+
+		"env": {
+			"NODE_ENV": "production",
+			"REDISTOGO_URL": "127.0.0.1:6379",
+			"PORT": "8080",
+		}
+	}]
+}
