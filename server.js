@@ -36,7 +36,7 @@ if(dbType == 'riak') {
 } else if(process.env.REDISTOGO_URL) { //heroku
   client = require('redis-url').connect(process.env.REDISTOGO_URL);
 } else if(config.env == "development") {
-  client = redis.createClient();
+  client = redis.createClient(process.env.REDISTOGO_URL);
 }  else {
   throw "Not sure how to connect to redis.";
 }
