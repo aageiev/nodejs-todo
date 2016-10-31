@@ -34,9 +34,9 @@ var client = null;
 if(dbType == 'riak') {
   client = new Riak.Client(process.env.RIAK_NODES.split(','));
 } else if(process.env.REDISTOGO_URL) { //heroku
-  client = require('redis-url').connect(process.env.REDISTOGO_URL);
+  client = require('redis-url').connect(6379,process.env.REDIS_HOST);
 } else if(config.env == "development") {
-  client = redis.createClient(process.env.REDISTOGO_URL);
+  client = redis.createClient();
 }  else {
   throw "Not sure how to connect to redis.";
 }
