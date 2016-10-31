@@ -30,16 +30,18 @@ function getDbType() {
 }
 
 var client = null;
+console.log("Connecting to redis server at: " + process.env.REDIS_HOST);
+client = redis.createClient(6379,process.env.REDIS_HOST);
 
-if(dbType == 'riak') {
-  client = new Riak.Client(process.env.RIAK_NODES.split(','));
-} else if(process.env.REDISTOGO_URL) { //heroku
-  client = require('redis-url').connect(6379,process.env.REDIS_HOST);
-} else if(config.env == "development") {
-  client = redis.createClient();
-}  else {
-  throw "Not sure how to connect to redis.";
-}
+// if(dbType == 'riak') {
+//   client = new Riak.Client(process.env.RIAK_NODES.split(','));
+// } else if(process.env.REDISTOGO_URL) { //heroku
+//   client = require('redis-url').connect(6379,process.env.REDIS_HOST);
+// } else if(config.env == "development") {
+//   client = redis.createClient();
+// }  else {
+//   throw "Not sure how to connect to redis.";
+// }
 
 app.set('view engine', 'ejs');
 app.set('view options', { layout: false });
